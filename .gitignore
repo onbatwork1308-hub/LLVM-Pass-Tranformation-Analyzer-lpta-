@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# LLVM intermediate files LPTA generates while running
+*.ll
+*.s
+*.bc
+
+# Generated output (keep the folder, ignore its contents)
+output/*
+!output/.gitkeep
+
+# OS/editor junk
+.DS_Store
+.vscode/
