@@ -1,0 +1,25 @@
+# Add one entry per pass. No code change needed to add a new pass here.
+
+mem2reg:
+  category: "Memory to SSA"
+  description: "Promotes stack variables to SSA registers."
+
+instcombine:
+  category: "Peephole optimization"
+  description: "Simplifies algebraic and constant expressions locally."
+
+gvn:
+  category: "Redundancy elimination"
+  description: "Removes redundant computations using value numbering."
+
+licm:
+  category: "Loop optimization"
+  description: "Moves loop-invariant code outside the loop body."
+
+loop-vectorize:
+  category: "Vectorization"
+  description: "Converts scalar loop bodies into SIMD operations."
+
+simplifycfg:
+  category: "Control flow simplification"
+  description: "Removes dead code and simplifies the control flow graph."

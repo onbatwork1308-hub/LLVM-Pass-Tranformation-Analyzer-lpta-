@@ -6,4 +6,5 @@ def diff_ir(ir_before: str, ir_after: str) -> list[str]:
     returns: list of unified-diff lines
     """
 
-    return list(difflib.unified_diff(ir_before.splitlines(), ir_after.splitlines(), lineterm=""))
+    return list(difflib.unified_diff(ir_before.splitlines(), 
+                                     ir_after.splitlines(), lineterm=""))

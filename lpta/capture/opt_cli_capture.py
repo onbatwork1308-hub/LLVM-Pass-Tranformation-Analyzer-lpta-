@@ -21,11 +21,11 @@ class OptCliCapture(CaptureBackend):
         """
 
         ll_path = self._compile_to_ir(source_path)
-        pass_log = self.run_opt(ll_path, opt_level)
+        pass_log = self._run_opt(ll_path, opt_level)
 
         os.remove(ll_path)
 
-        return self.parse_log(pass_log)
+        return self._parse_log(pass_log)
 
     def _compile_to_ir(self,source_path: str) -> str:
         """
@@ -34,7 +34,7 @@ class OptCliCapture(CaptureBackend):
         """
 
         ll_path = tempfile.mktemp(suffix=".ll")
-        subprocess.run(["clang", "-S", "emit-llvm", "-Xclang", "-disable-O0-optnone", source_path, "-o", ll_path], check= True)
+        subprocess.run(["clang-22", "-S", "-emit-llvm", "-Xclang", "-disable-O0-optnone", source_path, "-o", ll_path], check= True)
 
         return ll_path
 
@@ -45,7 +45,11 @@ class OptCliCapture(CaptureBackend):
         returns: raw pass log text.
         """
 
-        result = subprocess.run(["opt", f"-{opt_level}", "print-changed=quiet", "-S", ll_path, "-o", "/dev/null"], check= True)
+        result = subprocess.run(["opt-22", f"-{opt_level}", 
+                                "-print-changed=quiet", 
+                                "-print-module-scope", "-S", 
+                                ll_path, "-o", "/dev/null"], 
+                                capture_output=True, text=True, check=True)
 
         return result.stderr
 
@@ -62,7 +66,7 @@ class OptCliCapture(CaptureBackend):
         for i, match in enumerate(matches):
             pass_name, function_name = match.group(1), match.group(2)
             start = match.end()
-            end = match[i + 1].start() if i + 1 < len(matches) else len(pass_log)
+            end = matches[i + 1].start() if i + 1 < len(matches) else len(pass_log)
 
             ir_after = pass_log[start:end].strip()
 

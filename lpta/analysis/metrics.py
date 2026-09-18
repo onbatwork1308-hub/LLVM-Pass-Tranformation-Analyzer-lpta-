@@ -1,9 +1,5 @@
 import llvmlite.binding  as llvm 
 
-llvm.initialize()
-llvm.initialize_native_target()
-llvm.initialize_native_asmprinter()
-
 def count_metrics(ir_text: str) -> dict:
     """
     ir_text: LLVM IR as text.

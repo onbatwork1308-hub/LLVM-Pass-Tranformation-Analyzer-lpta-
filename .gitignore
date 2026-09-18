@@ -8,6 +8,7 @@ venv/
 *.ll
 *.s
 *.bc
+tmp/
 
 # Generated output (keep the folder, ignore its contents)
 output/*
