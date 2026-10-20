@@ -22,7 +22,6 @@ Instead of manually comparing multiple IR dumps, LPTA helps answer:
 - **Pass knowledge:** Store pass descriptions in YAML to help explain common optimization passes.
 - **HTML reporting:** Generate a report that makes the analysis easier to inspect.
 - **Example programs:** Includes C examples covering Fibonacci, loops, matrix multiplication, and array summation.
-- **Tests:** Includes tests for capture, history construction, and metrics.
 
 ## Architecture
 
@@ -148,25 +147,6 @@ The `examples/` directory contains:
 
 These programs can be used to explore how LLVM optimization passes change IR for different control-flow, arithmetic, and memory-access patterns.
 
-## Running tests
-
-Run the test suite with:
-
-```bash
-python -m pytest
-```
-
-If `pytest` is not installed, install it in your virtual environment before running the tests.
-
-## Technology stack
-
-- **Python** for orchestration and analysis
-- **LLVM / Clang / `opt`** for compiler IR and optimization workflows
-- **IR diffing libraries** for identifying textual differences between snapshots
-- **HTML, CSS, and JavaScript** for the frontend
-- **JSON and YAML** for structured history and pass descriptions
-- **pytest** for automated testing
-
 ## Current scope
 
 The current implementation focuses on capturing and comparing IR, calculating supported metrics, building a transformation history, and generating reports.
@@ -179,10 +159,3 @@ More advanced capabilities, such as reliable semantic matching of instructions, 
 - [Pass Knowledge Guide](docs/PASS_KNOWLEDGE_GUIDE.md)
 - [Roadmap](docs/ROADMAP.md)
 
-## Contributing
-
-Contributions, bug reports, and suggestions are welcome. When reporting an issue, include the LLVM version, Python version, command used, and a minimal C or LLVM IR example that reproduces the problem.
-
-## License
-
-See [`LICENSE`](LICENSE) for the license terms.
